@@ -1,129 +1,191 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Photo Feed</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Instagram Feed with Bootstrap</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <script src="https://kit.fontawesome.com/072e5df971.js" crossorigin="anonymous"></script>
     <style>
-        .post-card img {
-            max-width: 50%;
-            height: auto;
-            margin: 0 auto;
-            display: block;
+        .nav-pills .nav-link {
+            color: grey;
         }
-        .post-card .likes {
-            font-weight: bold;
-            text-align: center;
-        }
-        .post-card .post-text {
-            font-size: 14px;
-            color: #555;
-            text-align: center;
-        }
-        .list-view .col-12 {
-            max-width: 100%;
-        }
-        .grid-view .col-12 {
-            max-width: 33.3333%;
+        .nav-pills .nav-link.active {
+            color: blue;
         }
     </style>
 </head>
+
 <body>
-    <div class="container py-3 border-bottom">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <i class="fab fa-instagram fa-2x me-2"></i>
-                <h4 class="m-0">Instagram</h4>
+   
+    <nav class="navbar navbar-light bg-light py-3">
+        <div class="container-fluid">
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <i class="fa-brands fa-instagram fa-xl"></i>
+                    <h5 class="d-inline-block fs-5">Instagram</h5>
+                </div>
+                <div class="d-flex align-right justify-content-end">
+                   
+                    <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Create a new post
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Accesibility</a></li>
+                            <li><a class="dropdown-item" href="#">Privacy and Data</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex align-items-center">
-                <button class="btn btn-success me-2">Create a new post</button>
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    <i class="fas fa-cog"></i>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Privacy</a></li>
-                </ul>
+        </div>
+    </nav>
+
+   
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create a new post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Caption:</h6>
+                    <textarea class="form-control" placeholder="Add the caption of your post here"
+                        id="floatingTextarea2"></textarea>
+                    <div class="row p-2">
+                        <button class="col-1 border rounded p-1 m-1 btn-light">
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+                        <button class="col-1 border rounded p-1 m-1 btn-light">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Publish</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container text-center">
-        <button class="btn btn-outline-secondary me-2" id="grid-view">
-            <i class="fas fa-th-large"></i>
-        </button>
-        <button class="btn btn-outline-secondary" id="list-view">
-            <i class="fas fa-list"></i>
-        </button>
-        <!--
-Comentarios del proyecto:
 
-- Usé imágenes de bosques porque los URLs de las otras fotos marcaban como rotos o inaccesibles.
-- Todas las descripciones de las imágenes tienen texto genérico "Lorem ipsum dolor sit amet" para scerlo mas rapido por que escribi descripciones de cada imagen que cambiaba varias veces.
-- El diseño utiliza Bootstrap y está estructurado con clases como 'container', 'row', y 'col' tal como en la clase con yolfrank, pero me costo un buen y al final saque las fotos de una web de bosques.
--->
-
-    </div>
-    <div class="container mt-4">
-        <div class="row grid-view" id="photo-feed">
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/25810976/pexels-photo-25810976/free-photo-of-gafas-de-sol-desayuno-bol-tazon.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 1">
-                <p class="likes">1500 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  
+    <div class="container-fluid p-2">
+        <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true"><i
+                        class="fa-solid fa-table-cells"></i></a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false"><i class="fa-solid fa-square"></i></a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+        
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row">
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                    <div class="col-4 p-1">
+                        <img src="https://images.pexels.com/photos/3224173/pexels-photo-3224173.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="height: 30vw; object-fit: cover;" alt="">
+                    </div>
+                </div>
             </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/28271477/pexels-photo-28271477/free-photo-of-madera-verano-seco-secar.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 2">
-                <p class="likes">2200 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/27127317/pexels-photo-27127317/free-photo-of-arte-pintura-pintando-cuadro.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 3">
-                <p class="likes">1850 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/30254740/pexels-photo-30254740.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 4">
-                <p class="likes">1400 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/30351599/pexels-photo-30351599/free-photo-of-arte-latte-sobre-capuchino-en-taza-amarilla.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 5">
-                <p class="likes">2000 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/29933587/pexels-photo-29933587/free-photo-of-montana-schynige-platte.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 6">
-                <p class="likes">1100 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/28578393/pexels-photo-28578393.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 7">
-                <p class="likes">950 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="col-12 post-card">
-                <img src="https://images.pexels.com/photos/30332025/pexels-photo-30332025/free-photo-of-buzon-esmerilado-de-los-alpes-austriacos.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Imagen 8">
-                <p class="likes">1300 Likes</p>
-                <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+           
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Beautiful Sunset</div>
+                            <small class="align-bottom">09/15</small>
+                        </div>
+                        <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="object-fit: cover;" alt=""/>
+                        <div class="p-2">
+                            <strong>1500 Likes</strong>
+                            <p>This is an example of a very good photo that you can post on instagram</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Mountain View</div>
+                            <small>07/22</small>
+                        </div>
+                        <img src="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="object-fit: cover;" alt=""/>
+                        <div class="p-2">
+                            <strong>2200 Likes</strong>
+                            <p>This is an example of a very good photo that you can post on instagram</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Forest Path</div>
+                            <small>05/10</small>
+                        </div>
+                        <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=600" class="img-fluid w-100" style="object-fit: cover;" alt=""/>
+                        <div class="p-2">
+                            <strong>1800 Likes</strong>
+                            <p>This is an example of a very good photo that you can post on instagram</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const gridViewBtn = document.getElementById("grid-view");
-        const listViewBtn = document.getElementById("list-view");
-        const photoFeed = document.getElementById("photo-feed");
 
-        gridViewBtn.addEventListener("click", () => {
-            photoFeed.classList.add("grid-view");
-            photoFeed.classList.remove("list-view");
-        });
-
-        listViewBtn.addEventListener("click", () => {
-            photoFeed.classList.add("list-view");
-            photoFeed.classList.remove("grid-view");
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
